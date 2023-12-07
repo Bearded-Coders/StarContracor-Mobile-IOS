@@ -4,26 +4,16 @@ import {
   SafeAreaView,
   ScrollView,
   View,
-  Pressable,
   Text,
   ImageBackground,
   ActivityIndicator
 } from 'react-native';
 import { StarRating } from "../../components";
-import Auth from "../../utils/auth";
 import { images, COLORS } from "../../constants";
 import styles from "./HomeScreen.style";
-import { FlatList } from "react-native-gesture-handler";
 
-const HomeScreen = ({ navigation, isLoading, isLoggedIn, setIsLoggedIn, user }) => {
-
-  const handleLogout = async () => {
-    Auth.logout();
-    setIsLoggedIn(false);
-  };
-
-  console.log("User: ", user)
-  console.log("Jobs Complete: ", user.jobsComplete)
+const HomeScreen = ({ navigation, isLoading, isLoggedIn, user }) => {
+  // console.log("User: ", user)
   if (isLoggedIn) {
     return (
       <ImageBackground

@@ -7,13 +7,15 @@ import Login from '../pages/Login/Login.jsx';
 import Signup from '../pages/Signup/Signup.jsx';
 import Auth from '../utils/auth.js';
 import userHandler from '../utils/userHandler.js';
+import { COLORS, icons, images } from '../constants';
+import { ScreenHeaderBtn } from '../components';
 
 const Stack = createStackNavigator();
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState({});
-    const [userId, setUserId] = useState("");
+    const [changesMade, setChangesMade] = useState(false);
 
     async function fetchUserData(userId) {
         const response = await userHandler.fetchUserData(userId);
@@ -31,8 +33,6 @@ const Home = () => {
             const id = await SecureStore.getItemAsync('userId');
             if(loggedIn) {
               await fetchUserData(id);
-            } else {
-                setIsLoggedIn(false);
             }
 
             setIsLoading(false);
@@ -41,16 +41,42 @@ const Home = () => {
         }
     }
 
+    function getProfilePic() {
+        if(isLoggedIn) {
+            return { uri: user.profilePic }
+        } else {
+            return images.profile
+        }
+    }
+
     useEffect(() => {
         checkLoggedIn();
-    }, [isLoggedIn]);
+        setChangesMade(false);
+    }, [isLoggedIn, changesMade]);
 
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator
                 initialRouteName="Home"
                 screenOptions={{
-                    headerShown: false,
+                    headerStyle: {
+                        backgroundColor: COLORS.black
+                    },
+                    headerShadowVisible: false,
+                    headerLeft: () => (
+                        <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" isProfile={false} />
+                    ),
+                    headerRight: () => (
+                        <ScreenHeaderBtn 
+                            iconUrl={getProfilePic()} 
+                            dimension="100%" 
+                            isProfile={true} 
+                            setChangesMade={setChangesMade} 
+                            setIsLoggedIn={setIsLoggedIn} 
+                            changesMade={changesMade}
+                        />
+                    ),
+                    headerTitle: "",
                 }}
             >
                 <Stack.Screen name="Home">

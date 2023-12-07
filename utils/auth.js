@@ -64,10 +64,7 @@ class AuthService {
         body: JSON.stringify(data),
         credentials: 'include'
       });
-
-      const headers = response.headers;
-      console.log('Response Headers:', headers);
-
+      
       if (response.status === 401) {
         const message = await response.text();
         console.log(message);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import styles from './StarRating.style';
 
 const StarRating = ({ rating }) => {

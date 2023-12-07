@@ -5,8 +5,6 @@ class UserHandler {
     async fetchUserData(userId) {
         const url = `http://192.168.2.184:8082/profile/${userId}`;
         const token = await Auth.getToken();
-        console.log("Fetch User called")
-        console.log("Token: ", token);
         try {
             const response = await fetch(url, {
                 method: 'GET',
