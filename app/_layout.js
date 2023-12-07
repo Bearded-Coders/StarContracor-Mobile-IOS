@@ -30,7 +30,8 @@ const Layout = () => {
             onLayout={onLayoutRootView}
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: COLORS.primary,
+                    backgroundColor: COLORS.black,
+                    paddingBottom: "10px",
                 },
                 headerShadowVisible: false,
                 headerLeft: () => (

@@ -13,6 +13,7 @@ import ScreenHeader from "./screenHeader/ScreenHeader";
 
 // Login
 import Login from './login/Login';
+import StarRating from "./StarRating/StarRating";
 
 export {
   ScreenHeaderBtn,
@@ -21,5 +22,6 @@ export {
   Popularjobs,
   NearbyJobCard,
   ScreenHeader,
-  Login
+  Login,
+  StarRating
 };
