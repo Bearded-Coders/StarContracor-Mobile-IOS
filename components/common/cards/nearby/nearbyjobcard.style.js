@@ -10,14 +10,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: SIZES.medium,
     borderRadius: SIZES.small,
-    backgroundColor: "#FFF",
+    backgroundColor: COLORS.black,
     ...SHADOWS.medium,
-    shadowColor: COLORS.white,
+    shadowColor: COLORS.primary,
+    margin: 10
   },
   logoContainer: {
     width: 50,
     height: 50,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.black,
     borderRadius: SIZES.medium,
     justifyContent: "center",
     alignItems: "center",

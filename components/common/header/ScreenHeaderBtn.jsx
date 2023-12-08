@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Image, Modal, View, Text, StyleSheet, Button } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 import styles from './screenheader.style';
 import Auth from '../../../utils/auth';
 
-const ScreenHeaderBtn = ({ navigation, iconUrl, dimension, isProfile, setChangesMade, setIsLoggedIn, changesMade }) => {
+const ScreenHeaderBtn = ({ iconUrl, dimension, isProfile, setChangesMade, setIsLoggedIn, changesMade }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
+  const navigation = useNavigation();
+  
   const nonProfileOptions = [
     { label: 'Home', value: 'option1' },
     { label: 'Ships', value: 'option2' },
@@ -34,6 +35,9 @@ const ScreenHeaderBtn = ({ navigation, iconUrl, dimension, isProfile, setChanges
   const handleOptionPress = async (item) => {
     // Handle the option press as needed
     switch (item.value) {
+      case "option3":
+        navigation.navigate('JobBoard');
+        break;
       case 'option6':
         await Auth.logout();
         setIsLoggedIn(false);

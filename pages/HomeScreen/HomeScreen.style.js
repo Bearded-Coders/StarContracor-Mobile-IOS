@@ -12,7 +12,9 @@ const styles = StyleSheet.create({
   },
   scrollContainerUser: {
     flex: 1,
-    marginTop: 20
+    marginTop: 20,
+    flexDirection: "column",
+    width: "100%"
   },
   buttonContainer: {
     alignItems: 'center',
