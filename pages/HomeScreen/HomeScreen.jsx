@@ -16,10 +16,6 @@ const HomeScreen = ({ navigation, isLoading, isLoggedIn, user }) => {
   // console.log("User: ", user)
   if (isLoggedIn) {
     return (
-      <ImageBackground
-        source={images.grimBg}  // Replace 'url_to_your_image' with the actual image URL or local resource
-        style={styles.container}
-      >
         <ScrollView contentContainerStyle={styles.scrollContainerUser}>
           {isLoading ? (
             <ActivityIndicator size="large" color={COLORS.primary} />
@@ -44,7 +40,6 @@ const HomeScreen = ({ navigation, isLoading, isLoggedIn, user }) => {
             </>
           )}
         </ScrollView>
-      </ImageBackground>
     )
   } else {
     return (

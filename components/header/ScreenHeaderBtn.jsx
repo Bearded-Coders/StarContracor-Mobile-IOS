@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, Image, Modal, View, Text, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './screenheader.style';
-import Auth from '../../../utils/auth';
+import Auth from '../../utils/auth';
 
 const ScreenHeaderBtn = ({ iconUrl, dimension, isProfile, setChangesMade, setIsLoggedIn, changesMade }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -35,6 +35,9 @@ const ScreenHeaderBtn = ({ iconUrl, dimension, isProfile, setChangesMade, setIsL
   const handleOptionPress = async (item) => {
     // Handle the option press as needed
     switch (item.value) {
+      case "option1":
+        navigation.navigate('Home');
+        break;
       case "option3":
         navigation.navigate('JobBoard');
         break;

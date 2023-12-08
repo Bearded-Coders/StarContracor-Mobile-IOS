@@ -1,27 +1,9 @@
-import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
-
-// home screen
-import Welcome from "./home/welcome/Welcome";
-import Nearbyjobs from "./home/nearby/Nearbyjobs";
-import Popularjobs from "./home/popular/Popularjobs";
-
-// common
-import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
-
-// ScreenHeader
-import ScreenHeader from "./screenHeader/ScreenHeader";
-
-// Login
-import Login from './login/Login';
+import ScreenHeaderBtn from "./header/ScreenHeaderBtn";
 import StarRating from "./StarRating/StarRating";
+import JobCards from "./JobCards/JobCards";
 
 export {
   ScreenHeaderBtn,
-  Welcome,
-  Nearbyjobs,
-  Popularjobs,
-  NearbyJobCard,
-  ScreenHeader,
-  Login,
-  StarRating
+  StarRating,
+  JobCards
 };

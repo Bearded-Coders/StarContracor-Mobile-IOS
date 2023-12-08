@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
-import HomeScreen from '../pages/HomeScreen/HomeScreen.jsx';
-import JobBoard from '../pages/JobBoard/JobBoard.jsx';
-import Login from '../pages/Login/Login.jsx';
-import Signup from '../pages/Signup/Signup.jsx';
+import { HomeScreen, JobBoard, JobDetails, Login, Signup } from '../pages/index.js';
+
 import Auth from '../utils/auth.js';
 import userHandler from '../utils/userHandler.js';
 import { COLORS, icons, images } from '../constants';
 import { ScreenHeaderBtn } from '../components';
-import JobDetails from '../pages/JobDetails/JobDetails.jsx';
+import CommonWrapper from '../components/CommonWrapper/CommonWrapper.jsx';
+
 
 const Stack = createStackNavigator();
 const Home = () => {
@@ -91,36 +90,52 @@ const Home = () => {
                 <Stack.Screen
                     name="Home">
                     {(props) =>
-                        <HomeScreen
-                            {...props}
-                            isLoading={isLoading}
-                            isLoggedIn={isLoggedIn}
-                            setIsLoggedIn={setIsLoggedIn}
-                            user={user}
-                        />}
+                        <CommonWrapper>
+                            <HomeScreen
+                                {...props}
+                                isLoading={isLoading}
+                                isLoggedIn={isLoggedIn}
+                                setIsLoggedIn={setIsLoggedIn}
+                                user={user}
+                            />
+                        </CommonWrapper>
+                    }
                 </Stack.Screen>
                 <Stack.Screen name="JobBoard">
                     {(props) =>
-                        <JobBoard
+                        <CommonWrapper>
+                            <JobBoard
+                                {...props}
+                                isLoggedIn={isLoggedIn}
+                                setIsLoggedIn={setIsLoggedIn}
+                                user={user}
+                            />
+                        </CommonWrapper>
+                    }
+                </Stack.Screen>
+                <Stack.Screen name="JobDetails">
+                    {(props) =>
+                        <JobDetails
                             {...props}
                             isLoggedIn={isLoggedIn}
                             setIsLoggedIn={setIsLoggedIn}
                             user={user}
                         />}
                 </Stack.Screen>
-                <Stack.Screen name="JobDetails">
-                {(props) =>
-                    <JobDetails
-                        {...props}
-                        isLoggedIn={isLoggedIn}
-                        setIsLoggedIn={setIsLoggedIn}
-                        user={user}
-                    />}
-            </Stack.Screen>
                 <Stack.Screen name="Login">
-                    {(props) => <Login {...props} setIsLoggedIn={setIsLoggedIn} />}
+                    {(props) =>
+                        <CommonWrapper>
+                            <Login {...props} setIsLoggedIn={setIsLoggedIn} />
+                        </CommonWrapper>
+                    }
                 </Stack.Screen>
-                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="Signup">
+                {(props) =>
+                    <CommonWrapper>
+                        <Signup {...props} setIsLoggedIn={setIsLoggedIn} />
+                    </CommonWrapper>
+                }
+                </Stack.Screen>
             </Stack.Navigator>
         </NavigationContainer>
     );

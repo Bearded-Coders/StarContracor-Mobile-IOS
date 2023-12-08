@@ -11,8 +11,7 @@ import {
 import { images, COLORS, SIZES } from "../../constants";
 import styles from "./JobBoard.style";
 import jobHandler from "../../utils/jobHandler";
-import PopularJobCard from "../../components/common/cards/popular/PopularJobCard";
-import NearbyJobCard from "../../components/common/cards/nearby/NearbyJobCard";
+import { JobCards } from "../../components";
 
 
 
@@ -34,18 +33,14 @@ const JobBoard = ({ navigation, isLoggedIn, user }) => {
         fetchJobs(currentPage);
     }, [currentPage]);
     return (
-        <ImageBackground
-            source={images.grimBg}
-            style={styles.container} // Add container styles
-        >
-            <View style={{ width: 300 }}>
-                <TouchableOpacity
-                    style={[styles.button, styles.loginButton]}
-                    onPress={() => navigation.navigate('CreateJob')}
-                >
-                    <Text>Create Job</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={styles.container}>
+            <TouchableOpacity
+                style={[styles.button, styles.loginButton]}
+                onPress={() => navigation.navigate('CreateJob')}
+            >
+                <Text>Create Job</Text>
+            </TouchableOpacity>
+
             <ScrollView
                 contentContainerStyle={styles.scrollContentContainer} // Add contentContainerStyle
             >
@@ -59,7 +54,7 @@ const JobBoard = ({ navigation, isLoggedIn, user }) => {
                     <FlatList
                         data={jobs}
                         renderItem={({ item }) => (
-                            <NearbyJobCard item={item} navigation={navigation} />
+                            <JobCards item={item} navigation={navigation} />
                         )}
                         keyExtractor={(item) => item?.id}
                         contentContainerStyle={{ columnGap: SIZES.medium, flexDirection: "column", width: "100%" }}
@@ -67,7 +62,7 @@ const JobBoard = ({ navigation, isLoggedIn, user }) => {
                     />
                 )}
             </ScrollView>
-        </ImageBackground>
+        </View>
     );
 };
 

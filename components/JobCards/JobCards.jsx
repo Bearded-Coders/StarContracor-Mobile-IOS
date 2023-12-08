@@ -1,11 +1,8 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import styles from './nearbyjobcard.style'
-import { images } from "../../../../constants";
+import styles from './JobCards.style'
 
-const NearbyJobCard = ({ item, navigation }) => {
-  // const navigation = useNavigation();
-  console.log(item.creator);
+const JobCards = ({ item, navigation }) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -26,4 +23,4 @@ const NearbyJobCard = ({ item, navigation }) => {
   )
 }
 
-export default NearbyJobCard;
+export default JobCards;
