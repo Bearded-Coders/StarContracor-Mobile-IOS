@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
-import { HomeScreen, JobBoard, JobDetails, Login, Signup } from '../pages/index.js';
+import {
+    HomeScreen, JobBoard, JobDetails,
+    Login, Signup, CreateJob
+} from '../pages/index.js';
 
 import Auth from '../utils/auth.js';
 import userHandler from '../utils/userHandler.js';
@@ -130,11 +133,20 @@ const Home = () => {
                     }
                 </Stack.Screen>
                 <Stack.Screen name="Signup">
-                {(props) =>
-                    <CommonWrapper>
-                        <Signup {...props} setIsLoggedIn={setIsLoggedIn} />
-                    </CommonWrapper>
-                }
+                    {(props) =>
+                        <CommonWrapper>
+                            <Signup {...props} setIsLoggedIn={setIsLoggedIn} />
+                        </CommonWrapper>
+                    }
+                </Stack.Screen>
+                <Stack.Screen name="CreateJob">
+                    {(props) =>
+                            <CreateJob
+                             {...props} 
+                             isLoggedIn={isLoggedIn} 
+                             user={user}
+                             />
+                    }
                 </Stack.Screen>
             </Stack.Navigator>
         </NavigationContainer>
