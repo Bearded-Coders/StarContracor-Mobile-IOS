@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './screenheader.style';
 import Auth from '../../utils/auth';
 
-const ScreenHeaderBtn = ({ iconUrl, dimension, isProfile, setChangesMade, setIsLoggedIn, changesMade }) => {
+const ScreenHeaderBtn = ({ iconUrl, dimension, isProfile, data }) => {
+  const { setChangesMade, setIsLoggedIn} = data
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigation = useNavigation();
   

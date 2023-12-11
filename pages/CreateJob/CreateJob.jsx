@@ -5,16 +5,15 @@ import { CheckBox } from 'react-native-elements';
 import jobHandler from '../../utils/jobHandler';
 import { COLORS } from '../../constants';
 
-const CreateJob = ({ navigation, isLoggedIn, user }) => {
+const CreateJob = ({ navigation, isLoggedIn, data }) => {
+    const { user, setChangesMade } = data;
   const createdDate = new Date().toLocaleDateString();
 
   const createJob = async (data) => {
     const response = await jobHandler.createJob(data);
-
-    if (response) {
-      setTimeout(() => {
-        navigation.replace('JobBoard');
-      }, 2000);
+    if(response) {
+        setChangesMade(true);
+        navigation.navigate("JobBoard");
     }
   };
 

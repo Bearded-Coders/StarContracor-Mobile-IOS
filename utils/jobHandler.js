@@ -1,11 +1,41 @@
 import { Alert } from 'react-native';
+import Auth from './auth';
 
 class JobHandler {
     async fetchAllJobs(currentPage) {
-        const url = `http://192.168.2.184:8082/jobs/postings?page=${currentPage}`;
-        return fetch(url, {
+        const url = `http://192.168.2.239:8082/jobs/postings?page=${currentPage}`;
+
+        const token = await Auth.getToken();
+        
+        return await fetch(url, {
             method: 'GET',
-            credentials: 'include'
+            credentials: 'include',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                return data;
+            })
+            .catch((error) => {
+                Alert.alert(`${error}`)
+            });
+    }
+
+    async fetchJobDetails(jobId) {
+        const url = `http://192.168.2.239:8082/jobs/jobdetails/${jobId}`;
+
+        const token = await Auth.getToken();
+
+        return await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
         })
             .then((response) => response.json())
             .then((data) => {
@@ -17,18 +47,20 @@ class JobHandler {
     }
 
     async createJob(data) {
-        const url = `http://localhost:8082/jobs/createjob`;
+        const token = await Auth.getToken();
+     
+        const url = `http://192.168.2.239:8082/jobs/createjob`;
+       
         const response = await fetch(url, {
             method: "POST",
             headers: {
-                'Authorization': `Bearer ${Auth.getToken()}`,
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
             credentials: 'include'
         });
 
-        console.log(response);
         if (response.status === 429) {
             Alert.alert(`Please wait before posting another job`)
         } else if (response.status === 401) {

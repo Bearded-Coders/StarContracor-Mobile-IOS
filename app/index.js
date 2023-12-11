@@ -58,6 +58,8 @@ const Home = () => {
         setChangesMade(false);
     }, [isLoggedIn, changesMade]);
 
+    // Props Structure/Destructuring 
+    const data = { changesMade, setChangesMade, isLoading, setIsLoading, isLoggedIn, setIsLoggedIn, user }
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator
@@ -73,9 +75,7 @@ const Home = () => {
                         <ScreenHeaderBtn
                             iconUrl={icons.menu} dimension="60%"
                             isProfile={false}
-                            setChangesMade={setChangesMade}
-                            setIsLoggedIn={setIsLoggedIn}
-                            changesMade={changesMade}
+                            data={data}
                         />
                     ),
                     headerRight: () => (
@@ -83,9 +83,7 @@ const Home = () => {
                             iconUrl={getProfilePic()}
                             dimension="100%"
                             isProfile={true}
-                            setChangesMade={setChangesMade}
-                            setIsLoggedIn={setIsLoggedIn}
-                            changesMade={changesMade}
+                            data={data}
                         />
                     ),
                 }}
@@ -96,10 +94,7 @@ const Home = () => {
                         <CommonWrapper>
                             <HomeScreen
                                 {...props}
-                                isLoading={isLoading}
-                                isLoggedIn={isLoggedIn}
-                                setIsLoggedIn={setIsLoggedIn}
-                                user={user}
+                                data={data}
                             />
                         </CommonWrapper>
                     }
@@ -109,21 +104,20 @@ const Home = () => {
                         <CommonWrapper>
                             <JobBoard
                                 {...props}
-                                isLoggedIn={isLoggedIn}
-                                setIsLoggedIn={setIsLoggedIn}
-                                user={user}
+                                data={data}
                             />
                         </CommonWrapper>
                     }
                 </Stack.Screen>
                 <Stack.Screen name="JobDetails">
                     {(props) =>
-                        <JobDetails
-                            {...props}
-                            isLoggedIn={isLoggedIn}
-                            setIsLoggedIn={setIsLoggedIn}
-                            user={user}
-                        />}
+                        <CommonWrapper>
+                            <JobDetails
+                                {...props}
+                                data={data}
+                            />
+                        </CommonWrapper>
+                    }
                 </Stack.Screen>
                 <Stack.Screen name="Login">
                     {(props) =>
@@ -143,8 +137,7 @@ const Home = () => {
                     {(props) =>
                             <CreateJob
                              {...props} 
-                             isLoggedIn={isLoggedIn} 
-                             user={user}
+                             data={data}
                              />
                     }
                 </Stack.Screen>
