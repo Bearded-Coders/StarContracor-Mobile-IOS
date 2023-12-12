@@ -15,11 +15,14 @@ import { JobCards } from "../../components";
 
 
 
-const JobBoard = ({ navigation, isLoggedIn, user }) => {
+const JobBoard = ({ navigation, data}) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [jobs, setJobs] = useState({});
+
+    const { changesMade } = data
+
 
     const fetchJobs = async (currentPage) => {
         const response = await jobHandler.fetchAllJobs(currentPage);
@@ -31,7 +34,7 @@ const JobBoard = ({ navigation, isLoggedIn, user }) => {
 
     useEffect(() => {
         fetchJobs(currentPage);
-    }, [currentPage]);
+    }, [currentPage, changesMade]);
     return (
         <View style={styles.container}>
             <TouchableOpacity

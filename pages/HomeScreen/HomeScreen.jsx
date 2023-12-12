@@ -12,7 +12,9 @@ import { StarRating } from "../../components";
 import { images, COLORS } from "../../constants";
 import styles from "./HomeScreen.style";
 
-const HomeScreen = ({ navigation, isLoading, isLoggedIn, user }) => {
+const HomeScreen = ({ navigation, data }) => {
+
+  const { isLoading, isLoggedIn, user } = data
   // console.log("User: ", user)
   if (isLoggedIn) {
     return (

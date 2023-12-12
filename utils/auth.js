@@ -37,7 +37,7 @@ class AuthService {
   }
 
   async logout() {
-   const response = await fetch("http://192.168.2.184:8082/auth/logout", {
+   const response = await fetch("http://192.168.2.239:8082/auth/logout", {
       method: 'POST',
       credentials: 'include'
     });
@@ -56,7 +56,7 @@ class AuthService {
     };
 
     try {
-      const response = await fetch("http://192.168.2.184:8082/auth/login", {
+      const response = await fetch("http://192.168.2.239:8082/auth/login", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ class AuthService {
         return false;
       } else if (response.ok) {
         const res = await response.json();
-  
+        console.log(res.jwt);
         // Save the JWT token securely
         await SecureStore.setItemAsync('jwt', res.jwt);
         await SecureStore.setItemAsync('userId', res.userId);

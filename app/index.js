@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
-import { HomeScreen, JobBoard, JobDetails, Login, Signup } from '../pages/index.js';
+import {
+    HomeScreen, JobBoard, JobDetails,
+    Login, Signup, CreateJob
+} from '../pages/index.js';
 
 import Auth from '../utils/auth.js';
 import userHandler from '../utils/userHandler.js';
@@ -55,6 +58,8 @@ const Home = () => {
         setChangesMade(false);
     }, [isLoggedIn, changesMade]);
 
+    // Props Structure/Destructuring 
+    const data = { changesMade, setChangesMade, isLoading, setIsLoading, isLoggedIn, setIsLoggedIn, user }
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator
@@ -70,9 +75,7 @@ const Home = () => {
                         <ScreenHeaderBtn
                             iconUrl={icons.menu} dimension="60%"
                             isProfile={false}
-                            setChangesMade={setChangesMade}
-                            setIsLoggedIn={setIsLoggedIn}
-                            changesMade={changesMade}
+                            data={data}
                         />
                     ),
                     headerRight: () => (
@@ -80,9 +83,7 @@ const Home = () => {
                             iconUrl={getProfilePic()}
                             dimension="100%"
                             isProfile={true}
-                            setChangesMade={setChangesMade}
-                            setIsLoggedIn={setIsLoggedIn}
-                            changesMade={changesMade}
+                            data={data}
                         />
                     ),
                 }}
@@ -93,10 +94,7 @@ const Home = () => {
                         <CommonWrapper>
                             <HomeScreen
                                 {...props}
-                                isLoading={isLoading}
-                                isLoggedIn={isLoggedIn}
-                                setIsLoggedIn={setIsLoggedIn}
-                                user={user}
+                                data={data}
                             />
                         </CommonWrapper>
                     }
@@ -106,21 +104,20 @@ const Home = () => {
                         <CommonWrapper>
                             <JobBoard
                                 {...props}
-                                isLoggedIn={isLoggedIn}
-                                setIsLoggedIn={setIsLoggedIn}
-                                user={user}
+                                data={data}
                             />
                         </CommonWrapper>
                     }
                 </Stack.Screen>
                 <Stack.Screen name="JobDetails">
                     {(props) =>
-                        <JobDetails
-                            {...props}
-                            isLoggedIn={isLoggedIn}
-                            setIsLoggedIn={setIsLoggedIn}
-                            user={user}
-                        />}
+                        <CommonWrapper>
+                            <JobDetails
+                                {...props}
+                                data={data}
+                            />
+                        </CommonWrapper>
+                    }
                 </Stack.Screen>
                 <Stack.Screen name="Login">
                     {(props) =>
@@ -130,11 +127,19 @@ const Home = () => {
                     }
                 </Stack.Screen>
                 <Stack.Screen name="Signup">
-                {(props) =>
-                    <CommonWrapper>
-                        <Signup {...props} setIsLoggedIn={setIsLoggedIn} />
-                    </CommonWrapper>
-                }
+                    {(props) =>
+                        <CommonWrapper>
+                            <Signup {...props} setIsLoggedIn={setIsLoggedIn} />
+                        </CommonWrapper>
+                    }
+                </Stack.Screen>
+                <Stack.Screen name="CreateJob">
+                    {(props) =>
+                            <CreateJob
+                             {...props} 
+                             data={data}
+                             />
+                    }
                 </Stack.Screen>
             </Stack.Navigator>
         </NavigationContainer>
