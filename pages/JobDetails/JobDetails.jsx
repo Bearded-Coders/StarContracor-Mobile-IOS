@@ -5,6 +5,7 @@ import jobHandler from '../../utils/jobHandler';
 import styles from './JobDetails.style';
 import VisitorView from '../../components/JobDetails/Visitor/VisitorView';
 import OwnerView from '../../components/JobDetails/Owner/OwnerView';
+import Comments from '../../components/JobDetails/Comment/Comment';
 
 const JobDetails = ({ navigation, data }) => {
   const [jobDetails, setJobDetails] = useState({
@@ -41,7 +42,6 @@ const JobDetails = ({ navigation, data }) => {
     fetchJobDetails(jobId);
   }, [jobId, changesMade]);
 
-
   const props = { navigation, jobDetails, categories, user, jobId, setChangesMade }
 
   if (isLoading) {
@@ -52,7 +52,7 @@ const JobDetails = ({ navigation, data }) => {
     );
   } else if (userIsOwner) {
     return (
-      <OwnerView data={data} />
+      <OwnerView data={props} />
     )
   } else {
     return (

@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginVertical: 15,
         elevation: 3, // Add elevation for a shadow effect
-      },
-      loginButton: {
+    },
+    loginButton: {
         backgroundColor: COLORS.secondary,
         borderWidth: "1px",
         borderColor: COLORS.primary
-      },
+    },
 });
 
 export default styles;

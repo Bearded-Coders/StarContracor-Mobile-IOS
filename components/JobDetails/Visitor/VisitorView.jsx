@@ -1,5 +1,6 @@
 import React from "react";
-import { ScrollView, View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, ActivityIndicator, TouchableOpacity, Button, Pressable } from 'react-native';
+import Comments from "../Comment/Comment";
 import StarRating from "../../StarRating/StarRating";
 import { COLORS } from "../../../constants";
 import styles from "./VisitorView.style";
@@ -10,8 +11,9 @@ function VisitorView(props) {
 
     const userIsApplicant = jobDetails.applicantsList && jobDetails.applicantsList.some(applicant => applicant.id === user.id);
     const userIsAccepted = jobDetails.acceptedList && jobDetails.acceptedList.some(accepted => accepted.id === user.id);
+    
+    const username = `${jobDetails.creator.username}`
 
-    console.log(jobDetails)
     const convertDate = (createdDateArray) => {
         // Convert the array to a Date object
         const createdDate = new Date(...createdDateArray);
@@ -35,7 +37,7 @@ function VisitorView(props) {
     }
 
     return (
-        <ScrollView style={styles.container} contentContainerStyle={{ justifyContent: "space-between" }}>
+        <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>{jobDetails.title}</Text>
                 <Text style={styles.description}>{jobDetails.description}</Text>
@@ -74,7 +76,12 @@ function VisitorView(props) {
             </View>
 
             <View style={styles.groupContainer}>
-                <Text style={styles.label}>Created By: {jobDetails.creator.username} on {convertDate(jobDetails?.createdDate)} </Text>
+                <Text style={styles.label}>Created By:
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("UserProfile", { userId: jobDetails.creator.id })}>
+                    <Text style={{ color: "white" }}> {username} </Text>
+                </TouchableOpacity> 
+                 on {convertDate(jobDetails?.createdDate)} </Text>
             </View>
 
             <View style={styles.groupContainer}>
@@ -116,6 +123,7 @@ function VisitorView(props) {
                 )}
             </View>
 
+            <Comments data={props.data} />
         </ScrollView >
     );
 }

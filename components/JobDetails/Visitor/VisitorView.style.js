@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
         ...SHADOWS.medium,
         shadowColor: COLORS.primary,
         padding: 10,
-        marginTop: 10
+        marginTop: 10,
+        justifyContent: "center",
+        textAlign:"center"
     },
     detailsContainer: {
         flexDirection: 'row',
