@@ -4,7 +4,7 @@ import auth from './auth';
 
 class JobHandler {
     async fetchAllJobs(currentPage) {
-        const url = `http://192.168.2.239:8082/jobs/postings?page=${currentPage}`;
+        const url = `http://192.168.2.249:8082/jobs/postings?page=${currentPage}`;
 
         const token = await Auth.getToken();
 
@@ -26,7 +26,7 @@ class JobHandler {
     }
 
     async fetchJobDetails(jobId) {
-        const url = `http://192.168.2.239:8082/jobs/jobdetails/${jobId}`;
+        const url = `http://192.168.2.249:8082/jobs/jobdetails/${jobId}`;
 
         const token = await Auth.getToken();
 
@@ -50,7 +50,7 @@ class JobHandler {
     async createJob(data) {
         const token = await Auth.getToken();
 
-        const url = `http://192.168.2.239:8082/jobs/createjob`;
+        const url = `http://192.168.2.249:8082/jobs/createjob`;
 
         const response = await fetch(url, {
             method: "POST",
@@ -81,7 +81,7 @@ class JobHandler {
 
     async applyToJob(userId, jobId) {
         try {
-            const url = `http://192.168.2.239:8082/applicant/apply/${jobId}?userId=${userId}`;
+            const url = `http://192.168.2.249:8082/applicant/apply/${jobId}?userId=${userId}`;
 
             const token = await auth.getToken();
 
@@ -110,7 +110,7 @@ class JobHandler {
     }
 
     async leaveJob(userId, jobId) {
-        const url = `http://192.168.2.239:8082/applicant/remove/${jobId}?userIdRemove=${userId}`;
+        const url = `http://192.168.2.249:8082/applicant/remove/${jobId}?userIdRemove=${userId}`;
 
         const token = await auth.getToken();
 

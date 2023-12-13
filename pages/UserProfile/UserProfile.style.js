@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
     },
     ratingsContainer: {
         padding: 2,
-        borderWidth: "2px",
-        borderColor: "white",
+        ...SHADOWS.medium,
+        shadowColor: COLORS.primary,
         borderRadius: 10,
         alignItems: 'center',
         marginTop: 10,
-        backgroundColor: 'rgba(169, 169, 169, 0.8)',
+        backgroundColor: "black",
     },
     ratingHeader: {
         textDecorationLine: "underline",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         color: COLORS.white
     },
     rating: {
-        color: COLORS.black,
+        color: "red",
         fontSize: 18,
         margin: 5
     },

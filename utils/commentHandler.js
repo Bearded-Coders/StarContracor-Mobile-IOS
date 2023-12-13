@@ -3,7 +3,7 @@ import auth from "./auth";
 
 class commentHandler {
     async addComment(jobId, body) {
-        const url = `http://192.168.2.239:8082/comment/${jobId}/add-comment`;
+        const url = `http://192.168.2.249:8082/comment/${jobId}/add-comment`;
         const token = await auth.getToken();
 
         // console.log("Url: " + url, "JobID: " + jobId, "Token: " + token, "Body: " + body);
@@ -26,7 +26,7 @@ class commentHandler {
     }
 
     async deleteComment(jobId, commentId) {
-        const url = `http://192.168.2.239:8082/comment/${jobId}/delete/${commentId}`;
+        const url = `http://192.168.2.249:8082/comment/${jobId}/delete/${commentId}`;
         const token = await auth.getToken();
         const response = await fetch(url, {
             method: 'POST',

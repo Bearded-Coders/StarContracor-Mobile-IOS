@@ -28,9 +28,10 @@ const JobDetails = ({ navigation, data }) => {
 
   const fetchJobDetails = async (jobId) => {
     try {
+      setIsLoading(true);
       const response = await jobHandler.fetchJobDetails(jobId);
       setJobDetails(response);
-      setCategories(response.categories || [])
+      setCategories(response.categories || []);
     } catch (error) {
       console.error('Error fetching job details:', error);
     } finally {

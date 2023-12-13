@@ -42,6 +42,9 @@ const ScreenHeaderBtn = ({ iconUrl, dimension, isProfile, data }) => {
       case "option3":
         navigation.navigate('JobBoard');
         break;
+      case "option4":
+        navigation.navigate("Friends");
+        break;
       case 'option6':
         await Auth.logout();
         setIsLoggedIn(false);

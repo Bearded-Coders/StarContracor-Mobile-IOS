@@ -3,7 +3,7 @@ import auth from "./auth";
 
 class ApplicantHandler {
     async acceptApplicant(jobId, applicantId) {
-        const url = `http://192.168.2.239:8082/applicant/${jobId}/accept/${applicantId}`;
+        const url = `http://192.168.2.249:8082/applicant/${jobId}/accept/${applicantId}`;
 
         const token = await auth.getToken();
 
@@ -32,7 +32,7 @@ class ApplicantHandler {
     }
 
     async denyApplicant(jobId, applicantId) {
-        const url = `http://192.168.2.239:8082/applicant/${jobId}/deny/${applicantId}`;
+        const url = `http://192.168.2.249:8082/applicant/${jobId}/deny/${applicantId}`;
 
         const token = await auth.getToken();
 
@@ -58,7 +58,7 @@ class ApplicantHandler {
 
     // Remove user from job
     async removeUser(jobId, userId) {
-        const url = `http://192.168.2.239:8082/applicant/remove/${jobId}?userIdRemove=${userId}`
+        const url = `http://192.168.2.249:8082/applicant/remove/${jobId}?userIdRemove=${userId}`
 
         const token = await auth.getToken();
 

@@ -1,6 +1,7 @@
 import decode from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
 import { Alert } from 'react-native';
+import { useNavigation } from 'expo-router';
 
 class AuthService {
 
@@ -37,7 +38,7 @@ class AuthService {
   }
 
   async logout() {
-   const response = await fetch("http://192.168.2.239:8082/auth/logout", {
+   const response = await fetch("http://192.168.2.249:8082/auth/logout", {
       method: 'POST',
       credentials: 'include'
     });
@@ -56,7 +57,7 @@ class AuthService {
     };
 
     try {
-      const response = await fetch("http://192.168.2.239:8082/auth/login", {
+      const response = await fetch("http://192.168.2.249:8082/auth/login", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

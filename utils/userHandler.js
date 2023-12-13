@@ -3,7 +3,7 @@ import Auth from "./auth";
 class UserHandler {
     // Retrieve the user's data
     async fetchUserData(userId) {
-        const url = `http://192.168.2.239:8082/profile/${userId}`;
+        const url = `http://192.168.2.249:8082/profile/${userId}`;
         const token = await Auth.getToken();
         try {
             const response = await fetch(url, {
@@ -14,7 +14,7 @@ class UserHandler {
                 },
                 credentials: 'include'
             });
-        
+
             if (response.status === 200) {
                 const data = await response.json();
                 return data;

@@ -4,8 +4,9 @@ import { useRoute } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import styles from "./UserProfile.style";
-import userHandler from "../../utils/userHandler";
+import friendHandler from "../../utils/friendHandler";
 import { StarRating } from "../../components";
+import userHandler from '../../utils/userHandler';
 
 
 function UserProfile({ navigation, data }) {
@@ -22,19 +23,69 @@ function UserProfile({ navigation, data }) {
 
     const userSentRequest = userData && userData.sentFriendRequest?.some(dossierUser => dossierUser.id == user?.id); // Check if the viewed user has sent current user a friend request
 
+    const getRequestId = (userId, friendRequests) => {
+        const matchedUser = friendRequests.find(request => request.id === userId);
+        return matchedUser ? matchedUser.requestId : null;
+    };
+
+    const addFriend = async () => {
+        console.log("Add friend clicked")
+        const resposne = await friendHandler.AddFriend(user.id, userData.id);
+        if (resposne) {
+            setChangesMade(true);
+        }
+    }
+
+    const acceptFriendRequest = async () => {
+        // Extract the requestId for the friend request
+        const requestId = getRequestId(user.id, userData.sentFriendRequest);
+        if (requestId) {
+            await friendHandler.acceptFriendrequest(requestId);
+            setChangesMade(true);
+            // window.location.reload(true);
+        } else {
+            console.error('No matching friend request found for acceptFriendRequest');
+        }
+
+    };
+
+    const denyFriendRequest = async () => {
+        try {
+            // Extract the requestId for the friend request
+            const requestId = getRequestId(user.id, userData.sentFriendRequest);
+            if (requestId) {
+                await friendHandler.cancelFriendRequest(requestId);
+                setChangesMade(true);
+            } else {
+                console.error('No matching friend request found for denyFriendRequest');
+            }
+        } catch (error) {
+            console.error('Error denying friend request:', error);
+        }
+    };
+
+    const cancelFriendRequest = async () => {
+        // Extract the requestId for the friend request
+        const requestId = getRequestId(user.id, userData.receivedFriendRequest);
+        await friendHandler.cancelFriendRequest(requestId);
+        setChangesMade(true);
+    };
+
+    const removeFriend = async () => {
+        const res = await friendHandler.removeFriend(userData.id, user.id);
+        if (res) setChangesMade(true);
+    }
+
     const fetchUserProfile = async (userId) => {
         const data = await userHandler.fetchUserData(userId);
-
         if (userData) {
             setUserData(data);
         }
     }
 
-
     useEffect(() => {
         fetchUserProfile(userId)
     }, [changesMade]);
-
 
     return (
         <ScrollView style={styles.container}>
@@ -51,32 +102,30 @@ function UserProfile({ navigation, data }) {
                     <TouchableOpacity style={styles.button}>
                         <Text style={{ color: "white", textAlign: "center" }}>Message <FontAwesomeIcon icon={faMessage} size={20} style={{ color: "white", textAlign: "center" }} /></Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={removeFriend}>
                         <Text style={{ color: "white", textAlign: "center" }}>Remove Friend</Text>
                     </TouchableOpacity>
                 </View>
             ) : userSentRequest ? (
-                <View>
-                    <TouchableOpacity style={styles.button}>
+                <View style={styles.dblBtnContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => acceptFriendRequest()}>
                         <Text style={{ color: "white" }}>Accept Request</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => denyFriendRequest()}>
                         <Text style={{ color: "white" }}>Deny Request</Text>
                     </TouchableOpacity>
                 </View>
             ) : userRequested ? (
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => cancelFriendRequest()}>
                     <Text style={{ color: "white" }}>Cancel Request</Text>
                 </TouchableOpacity>
             ) : (
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => addFriend()}>
                     <Text style={{ color: "white" }}>Add Friend</Text>
                 </TouchableOpacity>
             )}
 
-
-
-
+            {/* User Ratings */}
             <View style={styles.ratingsContainer}>
                 <Text style={styles.ratingHeader}>Ratings</Text>
                 <Text style={styles.rating}>Average: {userData.avgRating != null ? <StarRating rating={parseInt(userData.avgRating)} /> : "N/A"}</Text>
@@ -84,11 +133,17 @@ function UserProfile({ navigation, data }) {
                 <Text style={styles.rating}>Applicant: {userData.avgApplicantRating != null ? <StarRating rating={parseInt(userData.avgApplicantRating)} /> : "N/A"}</Text>
             </View>
 
+            {/* User Job Data */}
             <View style={styles.ratingsContainer}>
                 <Text style={styles.ratingHeader}>Jobs</Text>
                 <Text style={styles.rating}>Jobs Complete: {userData.successfulJobsCompleted + userData.failedJobsCompleted}</Text>
                 <Text style={styles.rating}>Succesful Jobs: {userData.successfulJobsCompleted}</Text>
                 <Text style={styles.rating}>Failed Jobs: {userData.failedJobsCompleted}</Text>
+            </View>
+
+            {/* User Fleet */}
+            <View style={styles.ratingsContainer}>
+                <Text style={styles.ratingHeader}>{userData.username}'s Fleet</Text>
             </View>
         </ScrollView>
     )

@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
 import {
-    HomeScreen, JobBoard, JobDetails,
+    HomeScreen, JobBoard, JobDetails, Friends,
     Login, Signup, CreateJob, UserProfile
 } from '../pages/index.js';
 
@@ -129,6 +129,24 @@ const Home = () => {
                         </CommonWrapper>
                     }
                 </Stack.Screen>
+                <Stack.Screen name="CreateJob">
+                    {(props) =>
+                        <CreateJob
+                            {...props}
+                            data={data}
+                        />
+                    }
+                </Stack.Screen>
+                <Stack.Screen name="Friends">
+                    {(props) =>
+                        <CommonWrapper>
+                            <Friends
+                                {...props}
+                                data={data}
+                            />
+                        </CommonWrapper>
+                    }
+                </Stack.Screen>
                 <Stack.Screen name="Login">
                     {(props) =>
                         <CommonWrapper>
@@ -143,14 +161,7 @@ const Home = () => {
                         </CommonWrapper>
                     }
                 </Stack.Screen>
-                <Stack.Screen name="CreateJob">
-                    {(props) =>
-                        <CreateJob
-                            {...props}
-                            data={data}
-                        />
-                    }
-                </Stack.Screen>
+
             </Stack.Navigator>
         </NavigationContainer>
     );

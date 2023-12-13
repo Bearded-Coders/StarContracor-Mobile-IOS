@@ -39,7 +39,7 @@ const SHADOWS = {
     elevation: 2,
   },
   medium: {
-    shadowColor: "#000",
+    shadowColor: COLORS.primary,
     shadowOffset: {
       width: 0,
       height: 2,
