@@ -6,6 +6,7 @@ import HomeScreen from "./HomeScreen/HomeScreen";
 import CreateJob from "./CreateJob/CreateJob";
 import UserProfile from "./UserProfile/UserProfile";
 import Friends from "./Friends/Friends";
+import EditProfile from "./EditProfile/EditProfile.style";
 
 export {
     JobBoard,
@@ -15,5 +16,6 @@ export {
     HomeScreen, 
     CreateJob,
     UserProfile,
-    Friends
+    Friends,
+    EditProfile
 };
