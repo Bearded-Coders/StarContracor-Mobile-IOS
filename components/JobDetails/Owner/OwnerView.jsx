@@ -42,7 +42,11 @@ function OwnerView(props) {
                 <Text style={styles.label}>Applicants</Text>
                 {jobDetails.applicantsList && jobDetails.applicantsList.map((applicant) => (
                     <View>
-                        <TouchableOpacity style={styles.btnContainer} key={applicant.id}>
+                        <TouchableOpacity 
+                            style={styles.btnContainer} 
+                            key={applicant.id}
+                            onPress={() => navigation.navigate("UserProfile", { userId: applicant.id })}
+                        >
                             <Image
                                 source={{ uri: applicant.profilePic }}
                                 resizeMode="cover"
@@ -71,7 +75,11 @@ function OwnerView(props) {
                 <Text style={styles.label}>Hired Users</Text>
                 {jobDetails.acceptedList && jobDetails.acceptedList.map((applicant) => (
                     <View>
-                        <TouchableOpacity style={styles.btnContainer} key={applicant.id}>
+                        <TouchableOpacity 
+                            style={styles.btnContainer} 
+                            key={applicant.id}
+                            onPress={() => navigation.navigate("UserProfile", { userId: applicant.id })}
+                        >
                             <Image
                                 source={{ uri: applicant.profilePic }}
                                 resizeMode="cover"

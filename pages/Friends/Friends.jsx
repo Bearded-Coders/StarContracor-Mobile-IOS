@@ -4,7 +4,6 @@ import styles from "./Friends.style";
 
 function Friends({ navigation, data }) {
     const { user } = data;
-    console.log(user)
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>

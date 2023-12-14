@@ -1,7 +1,6 @@
 import decode from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
 import { Alert } from 'react-native';
-import { useNavigation } from 'expo-router';
 
 class AuthService {
 

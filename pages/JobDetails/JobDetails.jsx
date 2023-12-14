@@ -19,7 +19,7 @@ const JobDetails = ({ navigation, data }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
 
-  const { user, setChangesMade, changesMade } = data;
+  const { user, setChangesMade, changesMade, isLoggedIn } = data;
 
   const userIsOwner = user.id == jobDetails.creator.id;
 
@@ -51,7 +51,13 @@ const JobDetails = ({ navigation, data }) => {
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
-  } else if (userIsOwner) {
+  }
+
+  if(!isLoggedIn) {
+    navigation.navigate("Home");
+  }
+
+  if (userIsOwner) {
     return (
       <OwnerView data={props} />
     )

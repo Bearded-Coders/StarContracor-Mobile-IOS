@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
 import {
     HomeScreen, JobBoard, JobDetails, Friends,
-    Login, Signup, CreateJob, UserProfile, EditProfile
+    Login, Signup, CreateJob, UserProfile, Settings
 } from '../pages/index.js';
 
 import Auth from '../utils/auth.js';
@@ -56,7 +56,7 @@ const Home = () => {
     useEffect(() => {
         checkLoggedIn();
         setChangesMade(false);
-    }, [isLoggedIn, changesMade]);
+    }, [changesMade]);
 
     // Props Structure/Destructuring 
     const data = { changesMade, setChangesMade, isLoading, setIsLoading, isLoggedIn, setIsLoggedIn, user }
@@ -147,17 +147,27 @@ const Home = () => {
                         </CommonWrapper>
                     }
                 </Stack.Screen>
-                <Stack.Screen name="EditProfile">
-                {(props) =>
-                    <CommonWrapper>
-                        <EditProfile
-                            {...props}
-                            data={data}
-                        />
-                    </CommonWrapper>
-                }
-            </Stack.Screen>
+                <Stack.Screen
+                    name="EditProfile"
+                    options={{
+                        cardStyle: { backgroundColor: '#444444' },
+                    }}
+                >
+                    {(props) => <Settings {...props} data={data} />}
+                </Stack.Screen>
 
+                {/* PROFILE SETTINGS */}
+                <Stack.Screen
+                    name="UpdateInfo"
+                    options={{
+                        cardStyle: { backgroundColor: '#444444' },
+                    }}
+                >
+                    {(props) => <Login {...props} setIsLoggedIn={setIsLoggedIn} />}
+                </Stack.Screen>
+
+
+                {/* Login Signup */}
                 <Stack.Screen name="Login">
                     {(props) =>
                         <CommonWrapper>

@@ -19,7 +19,7 @@ class UserHandler {
                 const data = await response.json();
                 return data;
             } else if (response.status === 401) {
-                Auth.logout();
+                await Auth.logout();
                 return false;
             } else if (response.status === 500) {
                 const error = await response.text();
