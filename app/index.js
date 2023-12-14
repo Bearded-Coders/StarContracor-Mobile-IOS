@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as SecureStore from 'expo-secure-store';
 import {
     HomeScreen, JobBoard, JobDetails, Friends,
-    Login, Signup, CreateJob, UserProfile, Settings
+    Login, Signup, CreateJob, UserProfile, Settings,
+    UpdateInfo, UpdatePassword, TwoFactor
 } from '../pages/index.js';
 
 import Auth from '../utils/auth.js';
@@ -163,7 +164,7 @@ const Home = () => {
                         cardStyle: { backgroundColor: '#444444' },
                     }}
                 >
-                    {(props) => <Login {...props} setIsLoggedIn={setIsLoggedIn} />}
+                    {(props) => <UpdateInfo {...props} setIsLoggedIn={setIsLoggedIn} />}
                 </Stack.Screen>
 
 
